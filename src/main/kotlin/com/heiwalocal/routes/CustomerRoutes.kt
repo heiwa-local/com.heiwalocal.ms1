@@ -13,7 +13,7 @@ import java.util.*
 
 fun Route.customerRouting() {
 
-    route("/customer{token?}") {
+    route("/customer") {
         get {
             if (customerStorage.isNotEmpty()) {
                 call.respond(customerStorage)
