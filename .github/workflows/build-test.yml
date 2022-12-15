@@ -29,6 +29,6 @@ jobs:
         with:
           arguments: build
       - name: Grant Permissions to gradlew
-        run: chmod +x gradlew
+        run: chmod +x ./gradlew
       - name: Test
         run: ./gradlew test --tests "*"
