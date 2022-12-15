@@ -1,0 +1,44 @@
+plugins {
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.22'
+    id 'io.ktor.plugin' version '2.2.1'
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.22"
+}
+
+ktor {
+    docker {
+        jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
+        localImageName.set("sample-docker-image")
+        imageTag.set("0.0.1-preview")
+    }
+}
+
+group "com.heiwalocal"
+version "0.0.1"
+mainClassName = "com.heiwalocal.ApplicationKt"
+
+def isDevelopment = project.ext.has("development")
+applicationDefaultJvmArgs = ["-Dio.ktor.development=$isDevelopment"]
+
+repositories {
+    // ...
+    maven { url 'https://kotlin.bintray.com/ktor' }
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.ktor:ktor-server-auth:$ktor_version")
+    implementation("io.ktor:ktor-server-auth-jwt:$ktor_version")
+
+    implementation 'com.michaelstrasser:ktor-features-zipkin:0.2.12'
+
+    implementation("io.ktor:ktor-server-metrics-micrometer:$ktor_version")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.9.5")
+    implementation("io.ktor:ktor-server-core:$ktor_version")
+    implementation("io.ktor:ktor-server-netty:$ktor_version")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+}
