@@ -1,3 +1,5 @@
+name: Docker hub push action
+
 on:
   push:
     branches: ["master"]
