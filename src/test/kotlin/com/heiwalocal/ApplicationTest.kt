@@ -20,6 +20,6 @@ class ApplicationTest {
     @Test
     fun testCustomer() = testApplication {
         val response = client.get("/customer")
-        assertEquals(HttpStatusCode.BadGateway, response.status)
+        assertEquals(HttpStatusCode.OK, response.status)
     }
 }
